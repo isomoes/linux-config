@@ -98,3 +98,4 @@ anaconda3/**
 .zsh_sessions
 .tmux/plugins/tpm
 .ikanban
+.vim
