@@ -93,10 +93,26 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git sudo docker kubectl history colored-man-pages fzf)
 
+# ============================================================================
+# COMPLETION CONFIGURATION
+# ============================================================================
+
 # Add custom completions directory to fpath (before sourcing oh-my-zsh)
 fpath=(~/.zsh/completions $fpath)
 
+# Add bun completion directory to fpath if available
+if [[ -f "$HOME/.oh-my-zsh/completions/_bun" ]]; then
+    fpath=("$HOME/.oh-my-zsh/completions" $fpath)
+fi
+
 source $ZSH/oh-my-zsh.sh
+
+# Source fzf completion (macOS/Linux compatible)
+if [[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]]; then
+    source /opt/homebrew/opt/fzf/shell/completion.zsh
+else
+    source /usr/share/fzf/completion.zsh 2>/dev/null
+fi
 
 # Setup zoxide on your shell
 eval "$(zoxide init zsh)"
@@ -165,13 +181,11 @@ export FZF_ALT_C_OPTS="--preview 'bat --style=numbers --color=always {} 2> /dev/
 export FZF_CTRL_T_COMMAND="find . -type d"
 export FZF_ALT_C_COMMAND="find . -type f"
 
-# Source fzf key bindings and completion (macOS/Linux compatible)
+# Source fzf key bindings (macOS/Linux compatible)
 if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
     source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-    source /opt/homebrew/opt/fzf/shell/completion.zsh
 else
     source /usr/share/fzf/key-bindings.zsh 2>/dev/null
-    source /usr/share/fzf/completion.zsh 2>/dev/null
 fi
 
 # node version manager (check if file exists before sourcing)
@@ -241,10 +255,3 @@ alias qwen-bailian='OPENAI_API_KEY=$QWEN_AUTH_TOKEN OPENAI_BASE_URL="https://das
 
 # Claude with MiMo API
 alias claude-mimo='ANTHROPIC_AUTH_TOKEN=$MIMO_API_KEY ANTHROPIC_BASE_URL="https://api.xiaomimimo.com/anthropic" ANTHROPIC_DEFAULT_OPUS_MODEL="mimo-v2-flash" ANTHROPIC_DEFAULT_SONNET_MODEL="mimo-v2-flash" ANTHROPIC_DEFAULT_HAIKU_MODEL="mimo-v2-flash" $HOME/.local/bin/claude'
-
-
-
-# bun completions
-[ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"
-export PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple
-alias python=/opt/homebrew/bin/python3
