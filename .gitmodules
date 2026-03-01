@@ -7,3 +7,6 @@
 [submodule ".config"]
 	path = .config
 	url = https://github.com/isomoes/arch-config.git
+[submodule "Videos"]
+	path = Videos
+	url = https://github.com/isomoes-video/video.git
