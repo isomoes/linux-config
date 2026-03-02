@@ -99,3 +99,7 @@ anaconda3/**
 .tmux/plugins/tpm
 .ikanban
 .vim
+/.copaw/active_skills
+/.copaw/file_store
+/.copaw/sessions
+/.copaw

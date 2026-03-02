@@ -4,5 +4,14 @@
   "dismissed": {
     "findSkillsPrompt": true
   },
-  "lastSelectedAgents": ["opencode"]
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode"
+  ]
 }
