@@ -18,6 +18,6 @@ https://hacker-news.agi.li/rss.xml "~Hacker News AI" "news" "!"
 http://43.128.87.171:5000/qbitai/category/资讯 "~量子位资讯" "news" "!"
 
 # Blogs (hidden from feed list)
-https://jiahaoxiang2000.github.io/feed.xml "~Isomo Blog" "blog" "!"
+https://isomoes.github.io/feed.xml "~Isomo Blog" "blog" "!"
 https://github.blog/feed/ "~Github Blog" "blog" "!"
 http://43.128.87.171:5000/anthropic/engineering "~Anthropic Engineering" "blog" "!"
