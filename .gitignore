@@ -103,3 +103,6 @@ anaconda3/**
 /.copaw/file_store
 /.copaw/sessions
 /.copaw
+
+.cli-proxy-api/**
+!.cli-proxy-api/config.yaml
