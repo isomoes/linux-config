@@ -106,3 +106,4 @@ anaconda3/**
 
 .cli-proxy-api/**
 !.cli-proxy-api/config.yaml
+/.agents/.skill-lock.json
