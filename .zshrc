@@ -117,7 +117,7 @@ elif [[ -f /usr/share/fzf/completion.zsh ]]; then
 fi
 
 # Setup zoxide on your shell
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # ============================================================================
 # USER CONFIGURATION
