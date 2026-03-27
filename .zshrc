@@ -1,29 +1,49 @@
 # ============================================================================
+# PLATFORM DETECTION
+# ============================================================================
+
+case "$OSTYPE" in
+    darwin*)
+        IS_MACOS=1
+        IS_LINUX=0
+        ;;
+    linux*)
+        IS_MACOS=0
+        IS_LINUX=1
+        ;;
+    *)
+        IS_MACOS=0
+        IS_LINUX=0
+        ;;
+esac
+
+# ============================================================================
 # PATH CONFIGURATION
 # ============================================================================
 
-# Add cargo (Rust) bin to PATH
-export PATH=$HOME/.cargo/bin:$PATH
+# Homebrew (macOS only)
+if [[ "$IS_MACOS" == 1 ]] && [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# Add pipx local bin to PATH
-export PATH=$HOME/.local/bin:$PATH
-
-# Add custom sh local bin to PATH
-export PATH=$HOME/.sh:$PATH
-
-# Add bun gloabl bin to PATH
+# User-local tools
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.sh:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# Homebrew-managed Node.js (macOS only)
+if [[ "$IS_MACOS" == 1 ]] && [[ -d /opt/homebrew/opt/node@24/bin ]]; then
+    export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# opencode
-export PATH=$HOME/.opencode/bin:$PATH
-
-# Add Node@24 to PATH (macOS Homebrew)
-if [[ "$OSTYPE" == darwin* ]] && [[ -d /opt/homebrew/opt/node@24/bin ]]; then
-    export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
-fi
+# ============================================================================
+# OH MY ZSH
+# ============================================================================
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -31,23 +51,16 @@ fi
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# zstyle ':omz:update' mode disabled
+# zstyle ':omz:update' mode auto
+# zstyle ':omz:update' mode reminder
 
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
@@ -65,9 +78,6 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -77,20 +87,12 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git sudo docker kubectl history colored-man-pages fzf)
 
 # ============================================================================
@@ -98,31 +100,31 @@ plugins=(git sudo docker kubectl history colored-man-pages fzf)
 # ============================================================================
 
 # Add custom completions directory to fpath (before sourcing oh-my-zsh)
-fpath=(~/.zsh/completions $fpath)
+fpath=("$HOME/.zsh/completions" $fpath)
 
 # Add bun completion directory to fpath if available
 if [[ -f "$HOME/.oh-my-zsh/completions/_bun" ]]; then
     fpath=("$HOME/.oh-my-zsh/completions" $fpath)
 fi
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
-# Source fzf completion (macOS/Linux compatible)
-if [[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]]; then
+# fzf completion
+if [[ "$IS_MACOS" == 1 ]] && [[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]]; then
     source /opt/homebrew/opt/fzf/shell/completion.zsh
-else
-    source /usr/share/fzf/completion.zsh 2>/dev/null
+elif [[ -f /usr/share/fzf/completion.zsh ]]; then
+    source /usr/share/fzf/completion.zsh
 fi
 
 # Setup zoxide on your shell
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
 
 # ============================================================================
 # USER CONFIGURATION
 # ============================================================================
 
 # History configuration
-HISTFILE=~/.histfile
+HISTFILE="$HOME/.histfile"
 HISTSIZE=10000
 SAVEHIST=50000
 
@@ -149,8 +151,7 @@ export XMODIFIERS=@im=fcitx
 # PACKAGE MANAGER INTEGRATIONS
 # ============================================================================
 
-# Package manager mirror configurations (Linux only)
-if [[ "$OSTYPE" == linux* ]]; then
+if [[ "$IS_LINUX" == 1 ]]; then
     # Node and NPM mirror configuration for Chinese users
     export FNM_NODE_DIST_MIRROR=https://npmmirror.com/mirrors/node
     export NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
@@ -163,7 +164,7 @@ if [[ "$OSTYPE" == linux* ]]; then
     export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 fi
 
-# Maven mirror configuration
+# Maven configuration
 export MAVEN_OPTS="-Dmaven.repo.local=$HOME/.m2/repository"
 alias mvn='mvn -s $HOME/.m2/settings.xml'
 
@@ -171,7 +172,6 @@ alias mvn='mvn -s $HOME/.m2/settings.xml'
 # FZF CONFIGURATION
 # ============================================================================
 
-# Enhanced fuzzy finder with item numbers and previews
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --info=inline --multi --preview-window=:hidden"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --height 60%"
 export FZF_CTRL_T_OPTS="--preview 'tree -C {} 2> /dev/null || ls -la {}' --height 60%"
@@ -181,25 +181,24 @@ export FZF_ALT_C_OPTS="--preview 'bat --style=numbers --color=always {} 2> /dev/
 export FZF_CTRL_T_COMMAND="find . -type d"
 export FZF_ALT_C_COMMAND="find . -type f"
 
-# Source fzf key bindings (macOS/Linux compatible)
-if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
+# fzf key bindings
+if [[ "$IS_MACOS" == 1 ]] && [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
     source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-else
-    source /usr/share/fzf/key-bindings.zsh 2>/dev/null
+elif [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+    source /usr/share/fzf/key-bindings.zsh
 fi
 
-# node version manager (check if file exists before sourcing)
+# Node version manager
 if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
     source /usr/share/nvm/init-nvm.sh
-elif [[ -f ~/.nvm/nvm.sh ]]; then
-    source ~/.nvm/nvm.sh
+elif [[ -f "$HOME/.nvm/nvm.sh" ]]; then
+    source "$HOME/.nvm/nvm.sh"
 fi
 
 # ============================================================================
 # CUSTOM FUNCTIONS
 # ============================================================================
 
-# Custom date format function - formats date in YYYY-MM-DD HH:MM:SS TZ format (24-hour, no weekday)
 function mydate() {
     date +"%Y%m%d %H:%M:%S %Z %a"
 }
@@ -208,36 +207,31 @@ function tododate() {
     date +"%Y%m%d %a"
 }
 
-# Quick translation to Chinese function
 function tozh() {
-    # trans-cli "$@"
     trans --target-lang zh_CN "$@"
 }
 
-# Translation from Chinese to English function
 function toen() {
-    # trans-cli -f zh -t en "$@"
     trans --target-lang en "$@"
 }
 
 # ============================================================================
-# CLAUDE FUNCTIONS
+# LLM TOOLS
 # ============================================================================
 
-# Source token file if it exists (makes LLM API tokens available)
-[[ -f ~/.token ]] && source ~/.token
+# Source token file if it exists
+[[ -f "$HOME/.token" ]] && source "$HOME/.token"
 
-# Original Claude with proxy settings
+# Claude with proxy settings
 alias claude='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
-# alias claude-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
 
 # Codex routed through the same local proxy
 alias codex-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 codex'
 
-# OpenCode with proxy settings (SOCKS5 via SSH tunnel)
+# OpenCode with proxy settings
 alias opencode-proxy='HTTPS_PROXY=http://localhost:1080 opencode'
 
-# Short alias for opencode
+# Short aliases for OpenCode
 alias oc='opencode'
 alias ocp='opencode-proxy'
 
