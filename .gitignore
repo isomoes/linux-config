@@ -109,3 +109,5 @@ anaconda3/**
 !.cli-proxy-api/config.yaml
 /.agents/.skill-lock.json
 /.deepagents
+/go/pkg/**
+/.opencode/package-lock.json
