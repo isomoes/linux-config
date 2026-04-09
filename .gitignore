@@ -112,3 +112,4 @@ anaconda3/**
 /go/pkg/**
 /.opencode/package-lock.json
 /.pi/agent
+/.apifox-mcp-server
