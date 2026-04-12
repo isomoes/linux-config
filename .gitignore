@@ -113,3 +113,5 @@ anaconda3/**
 /.opencode/package-lock.json
 /.pi/agent
 /.apifox-mcp-server
+/.kiro
+/.docker
