@@ -115,3 +115,4 @@ anaconda3/**
 /.apifox-mcp-server
 /.kiro
 /.docker
+/.electron-gyp/39.0.0

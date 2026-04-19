@@ -1,30 +1,11 @@
-model = "gpt-5.3-codex"
-notify = ["python3", "/home/isomo/.codex/notify.py"]
+model = "gpt-5.4"
 model_reasoning_effort = "medium"
+model_provider = "isomoes"
 
-[projects."/home/isomo"]
-trust_level = "trusted"
-
-[projects."/home/isomo/Documents/writing/MATH"]
-trust_level = "trusted"
-
-[projects."/home/isomo/Documents/writing/big_paper"]
-trust_level = "trusted"
-
-[projects."/home/isomo/Documents/writing/deeper-paper"]
-trust_level = "trusted"
+[model_providers.isomoes]
+name = "isomoes api"
+base_url = "https://aiapi.isomoes.site/v1"
+env_key = "AIAPI_AUTH_KEY"
 
 [projects."/home/isomoes"]
 trust_level = "trusted"
-
-[projects."/home/isomoes/code/js/opencode-origin"]
-trust_level = "trusted"
-
-[mcp_servers.all-in-mcp]
-command = "pipx"
-args = ["run", "all-in-mcp"]
-env = { APAPER = "true", GITHUB_REPO_MCP = "true" }
-
-[notice.model_migrations]
-gpt-5-codex = "gpt-5.2-codex"
-"gpt-5.2-codex" = "gpt-5.3-codex"

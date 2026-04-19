@@ -30,6 +30,7 @@ fi
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.sh:$PATH"
+export PATH="$HOME/.bun:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.opencode/bin:$PATH"
 
@@ -249,3 +250,6 @@ alias qwen-bailian='OPENAI_API_KEY=$QWEN_AUTH_TOKEN OPENAI_BASE_URL="https://das
 
 # Claude with MiMo API
 alias claude-mimo='ANTHROPIC_AUTH_TOKEN=$MIMO_API_KEY ANTHROPIC_BASE_URL="https://api.xiaomimimo.com/anthropic" ANTHROPIC_DEFAULT_OPUS_MODEL="mimo-v2-flash" ANTHROPIC_DEFAULT_SONNET_MODEL="mimo-v2-flash" ANTHROPIC_DEFAULT_HAIKU_MODEL="mimo-v2-flash" $HOME/.local/bin/claude'
+
+# bun completions
+[ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"
