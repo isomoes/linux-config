@@ -17,7 +17,7 @@ https://wechat2rss.bestblogs.dev/feed/38be32e5376d852c13d3383e4d7a757fd9a55ff6.x
 https://hacker-news.agi.li/rss.xml "~Hacker News AI" "news" "!"
 
 # Blogs (hidden from feed list)
-https://isomoes.github.io/feed.xml "~Isomo Blog" "blog" "!"
+https://isomoes.github.io/en/feed.xml "~Isomo Blog" "blog" "!"
 https://github.blog/feed/ "~Github Blog" "blog" "!"
 http://43.128.87.171:5000/anthropic/engineering "~Anthropic Engineering" "blog" "!"
 http://43.128.87.171:5000/claude/blog "~Claude Blog" "blog" "!"
