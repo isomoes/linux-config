@@ -224,7 +224,7 @@ function toen() {
 [[ -f "$HOME/.token" ]] && source "$HOME/.token"
 
 # Claude with proxy settings
-alias claude='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
+# alias claude='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
 
 # Codex routed through the same local proxy
 alias codex-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 codex'
