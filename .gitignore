@@ -118,3 +118,4 @@ anaconda3/**
 /.electron-gyp/39.0.0
 /.claude-squad
 /.ikanban-tui
+/.tmux/plugins
