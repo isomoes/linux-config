@@ -5,5 +5,7 @@
 	helper = 
 	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !gh auth git-credential
+[credential "https://git.overleaf.com"]
+	helper = "!f() { echo username=git; echo \"password=$OVERLEAF_GIT\"; }; f"
