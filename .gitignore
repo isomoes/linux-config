@@ -119,3 +119,5 @@ anaconda3/**
 /.claude-squad
 /.ikanban-tui
 /.tmux/plugins
+/.aws/credentials
+/.aws/config
