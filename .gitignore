@@ -121,3 +121,4 @@ anaconda3/**
 /.tmux/plugins
 /.aws/credentials
 /.aws/config
+/.claude-code-web
