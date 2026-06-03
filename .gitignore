@@ -122,3 +122,6 @@ anaconda3/**
 /.aws/credentials
 /.aws/config
 /.claude-code-web
+.openclaw
+.cups
+Applications/Claude Code URL Handler.app/Contents
