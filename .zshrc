@@ -223,6 +223,9 @@ function toen() {
 # Source token file if it exists
 [[ -f "$HOME/.token" ]] && source "$HOME/.token"
 
+# Short alias for Claude Code
+alias cc='claude'
+
 # Claude with proxy settings
 # alias claude='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
 
