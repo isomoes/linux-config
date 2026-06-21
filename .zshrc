@@ -217,6 +217,40 @@ function toen() {
 }
 
 # ============================================================================
+# SYSTEMD USER UNITS
+# ============================================================================
+
+# Show enabled + running systemd user services that expose a URL (concise).
+function sysu() {
+    emulate -L zsh
+    setopt local_options no_xtrace no_verbose null_glob
+
+    [[ "$IS_LINUX" == 1 ]] || { print -u2 "sysu: systemd user units are Linux-only"; return 1 }
+
+    local dir="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+    local -a units=("$dir"/*.service)
+    (( $#units )) || { print "sysu: no user units in $dir"; return 0 }
+    units=(${units:t})
+
+    local u cg procfile
+    local -a pids ports urls
+    for u in $units; do
+        systemctl --user is-enabled --quiet "$u" 2>/dev/null || continue
+        systemctl --user is-active --quiet "$u" || continue
+        cg=$(systemctl --user show -p ControlGroup --value "$u" 2>/dev/null)
+        procfile="/sys/fs/cgroup${cg}/cgroup.procs"
+        pids=(); ports=(); urls=()
+        [[ -r "$procfile" ]] && pids=(${(f)"$(<$procfile)"})
+        if (( $#pids )) && (( $+commands[ss] )); then
+            ports=(${(fu)"$(ss -tlnp 2>/dev/null | awk -v re="pid=(${(j:|:)pids})," '$0 ~ re {n=split($4,a,":"); print a[n]}' | sort -un)"})
+        fi
+        (( $#ports )) || continue
+        urls=("http://localhost:"${^ports})
+        printf '  %-18s %s\n' "${u%.service}" "${(j:  :)urls}"
+    done
+}
+
+# ============================================================================
 # LLM TOOLS
 # ============================================================================
 
