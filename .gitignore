@@ -126,3 +126,5 @@ anaconda3/**
 .cups
 Applications/Claude Code URL Handler.app/Contents
 /.lemminx/cache/http/www.w3.org/Graphics/SVG/1.1/DTD
+/.elan
+/.agentsview
