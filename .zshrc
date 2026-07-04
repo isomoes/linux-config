@@ -290,3 +290,12 @@ alias claude-mimo='ANTHROPIC_AUTH_TOKEN=$MIMO_API_KEY ANTHROPIC_BASE_URL="https:
 
 # bun completions
 [ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/isomoes/.opam/opam-init/init.zsh' ]] || source '/home/isomoes/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
