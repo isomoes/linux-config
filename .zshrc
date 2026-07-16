@@ -268,10 +268,11 @@ alias codex-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost
 
 # OpenCode with proxy settings
 alias opencode-proxy='HTTPS_PROXY=http://localhost:1080 opencode'
-
 # Short aliases for OpenCode
 alias oc='opencode'
 alias ocp='opencode-proxy'
+# OpenCode: enable experimental workspace support
+export OPENCODE_EXPERIMENTAL_WORKSPACES=true
 
 # Claude with DeepSeek API
 alias claude-deepseek='ANTHROPIC_AUTH_TOKEN=$DEEPSEEK_AUTH_TOKEN ANTHROPIC_BASE_URL="https://api.deepseek.com/anthropic" ANTHROPIC_MODEL="deepseek-chat" CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-chat" ANTHROPIC_SMALL_FAST_MODEL="deepseek-chat" $HOME/.local/bin/claude'
@@ -299,3 +300,4 @@ alias claude-mimo='ANTHROPIC_AUTH_TOKEN=$MIMO_API_KEY ANTHROPIC_BASE_URL="https:
 # This section can be safely removed at any time if needed.
 [[ ! -r '/home/isomoes/.opam/opam-init/init.zsh' ]] || source '/home/isomoes/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+
