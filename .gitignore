@@ -131,3 +131,5 @@ Applications/Claude Code URL Handler.app/Contents
 /.BurpSuite/burpbrowser
 /.java
 /.opam
+/.ZAP
+/.pdcp
