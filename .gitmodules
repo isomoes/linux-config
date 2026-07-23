@@ -10,3 +10,6 @@
 [submodule "Videos"]
 	path = Videos
 	url = https://github.com/isomoes-video/video.git
+[submodule ".codex"]
+	path = .codex
+	url = https://github.com/isomoes/codex-config.git
