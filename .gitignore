@@ -137,3 +137,5 @@ Applications/Claude Code URL Handler.app/Contents
 /.dit/model.json
 /go/bin
 /nuclei-templates
+/.nuget
+/.officecli
