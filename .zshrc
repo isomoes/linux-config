@@ -278,9 +278,9 @@ alias codex-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost
 # OpenCode with proxy settings
 alias opencode-proxy='HTTPS_PROXY=http://localhost:1080 opencode'
 # Short aliases for OpenCode
-alias oc='opencode2'
+alias oc='opencode'
 alias ocp='opencode-proxy'
-# OpenCode: enable experimental workspace support
+# OpenCode V1: keep its converted database separate from opencode2.
 export OPENCODE_EXPERIMENTAL_WORKSPACES=true
 
 # Claude with DeepSeek API
