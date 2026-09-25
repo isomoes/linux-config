@@ -266,11 +266,11 @@ if (( $+commands[gh] )); then
     unset _github_mcp_token
 fi
 
-# Short alias for Claude Code
+# Claude Code through the local Kookeey HTTP proxy
 alias cc='claude'
 
 # Claude with proxy settings
-# alias claude='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 claude'
+alias claude='HTTPS_PROXY=http://127.0.0.1:10013 HTTP_PROXY=http://127.0.0.1:10013 claude'
 
 # Codex routed through the same local proxy
 alias codex-proxy='http_proxy=http://localhost:1080 https_proxy=http://localhost:1080 codex'
